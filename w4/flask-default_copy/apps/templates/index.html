@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Search Engine by lovegari</title>
+</head>
+<body style="font-family:Futura">
+   <div>
+      <h1> Search Engine </h1>
+      <p> Search for whatever you want to know! </p>
+      <form action="index" method="get">
+         <input type="text" name="text_get">
+         <input type="Submit" value="Click!">
+      </form>
+      <br>
+      <ul>
+         <li><a href = "http://search.naver.com/search.naver?where=nexearch&query={{ variable_get }}&sm=top_hty&fbm=0&ie=utf8">  Naver : {{ variable_get }} </a></li>
+
+         <li><a href = "http://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&o=&q={{ variable_get }}"> Daum : {{ variable_get }} </a></li>
+
+         <li><a href = "https://www.google.co.kr/?gws_rd=ssl#newwindow=1&q={{ variable_get }}" > Google : {{ variable_get }} </a></li>
+      </ul>
+      <br>
+      <p> Powered by <strong> lovegari </strong> </p>
+   </div>
+   <p></p>
+   <!--
+   <div>
+      POST : 
+      <form action="index" method="post">
+         <input type="text" name="text_post">
+         <input type="Submit" value="Click!">
+      </form>
+
+      You just typed {{ variable_post }}
+   </div>
+   -->
+</body>
+</html>

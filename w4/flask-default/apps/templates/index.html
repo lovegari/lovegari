@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Music Videos by lovegari</title>
+</head>
+<body style="font-family:Futura">
+	
+	<div>
+		<h1>New Music Videos</h1>
+		{% for author in authors %}
+			<ul style>
+				<li>{{ author }}</li>
+			</ul>
+		{% endfor %}
+		<p>Powered by <strong>lovegari</strong></p>
+	</div>
+
+</body>
+</html>
