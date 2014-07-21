@@ -1,9 +1,9 @@
 from flask import render_template, Flask
-#from apps import app
+from apps import app
 import urllib
 from bs4 import BeautifulSoup
 
-app = Flask(__name__)
+#app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 
@@ -28,5 +28,5 @@ def index():
 
 	return render_template("index.html",authors=authors)
 
-if __name__ == "__main__":
-	app.run(port=5005)
+#if __name__ == "__main__":
+#	app.run(port=5006)
