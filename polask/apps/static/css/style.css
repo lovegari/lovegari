@@ -1,0 +1,64 @@
+body {
+	font-family: Futura;
+}
+
+.no-list {
+	padding: 10px;
+	text-align: center;
+}
+
+.float-right {
+	float: right;
+}
+
+.bottomButtons {
+	margin: 10px 0 0 0;
+	padding: 10px;
+	text-align: center;
+}
+
+.llCommentList {
+	margin: 10px 0 0 0;
+}
+
+.title {
+	color: white;
+	font-size: 100px;
+	width: 300px;
+	font-family: Futura;
+	position: relative;
+	margin-top: 18%;
+	left: 60%;
+	text-shadow: 1px 1px 5px black;
+}
+
+.navbar-default {
+	background-color: rgba(255,255,255,0.8);
+	width: 100%;
+	left: 0px;
+	top: -50px;
+
+}
+
+#login {
+	width: 300px;
+	background-color: rgba(255,255,255,0);
+	position: relative;
+	margin-top: -2.5%;
+	left: 60%;
+	padding: 10px;
+	padding-bottom: 50px;
+	border-radius: 10px;
+}
+
+#join {
+	color: white;
+	text-align: center;
+	width: 300px;
+	margin: 0 auto;
+	text-shadow: 1px 1px 5px black;
+}
+
+#submit {
+	float: right;
+}

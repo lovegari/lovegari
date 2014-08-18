@@ -1,0 +1,15 @@
+<!--comment delete-->
+
+{% extends "layout.html" %}
+
+{% block contents %}
+    <div class="llArticleCreate">
+        <form role="form" method="post">
+            <div class="form-group">
+                <label for="article_create_password">삭제하려면 비밀번호를 입력하시오.</label>
+                <input type="password" name="password" class="form-control" id="article_create_password"/>
+            </div>
+            <button type="submit" class="btn btn-default">삭제하기</button>
+        </form>
+    </div>
+{% endblock %}
