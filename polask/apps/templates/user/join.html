@@ -1,22 +1,20 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
 
-{% block frontgate %}
-
+{% block contents %}
 <div id="maximage">
-	<img src="{{ url_for('static', filename='images/frontgate_bg_02.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_02.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_01.jpg') }}" width="1440px" height="740px">
     <img src="{{ url_for('static', filename='images/login_bg_03.jpg') }}" width="1440px" height="740px">
-	<img src="{{ url_for('static', filename='images/frontgate_bg_01.jpg') }}" width="1440px" height="740px">
-	<img src="{{ url_for('static', filename='images/frontgate_bg_03.jpg') }}" width="1440px" height="740px">
-	<img src="{{ url_for('static', filename='images/frontgate_bg_04.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_04.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_05.jpg') }}" width="1440px" height="740px">
 </div>
 
-<div class="title">
-	<p>Polask</p>
-</div>
-
-<div class="llArticleCreate" id="login">
+<div class="llCommentCreate" id="join">
     <form role="form" method="post">
-
+        <p style="font-size:60px; text-shadow: 1px 1px 5px black;">회원가입</p>
+        <p style="font-size:20px; text-shadow: 1px 1px 5px black;">1단계 : 기본 정보 입력</p>
+        <br>
+        
         {% block messages %}
             {% include "messages.html" %}
         {% endblock %}
@@ -41,10 +39,8 @@
         {% for field in form if field.widget.input_type != 'hidden' %}
             {{ render_field(field, class="form-control") }}
         {% endfor %}
-        <a href="{{ url_for('user_join') }}" class="btn btn-default">회원가입</a>
-        <button type="submit" class="btn btn-primary float-right" >로그인</button>
+
+        <button type="submit" class="btn btn-primary float-right">다음단계</button>
     </form>
 </div>
-
 {% endblock %}
-

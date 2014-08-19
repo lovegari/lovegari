@@ -5,13 +5,12 @@ models.py
 
 from apps import db
 
-class Login(db.Model):
+class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	login_pw = db.Column(db.String(255))
-	login_rpw = db.Column(db.String(255))
-	login_name = db.Column(db.String(255))
-	login_email = db.Column(db.String(255))
-	date_created = db.Column(db.DateTime())
+	email = db.Column(db.String(255))
+	password = db.Column(db.String(255))
+	name = db.Column(db.String(255))
+	join_date = db.Column(db.DateTime())
 
 class Article(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -19,8 +18,7 @@ class Article(db.Model):
 	content = db.Column(db.Text())
 	author = db.Column(db.String(255))
 	category = db.Column(db.String(255))
-	password = db.Column(db.String(255))
-	count = db.Column(db.Integer)
+	like = db.Column(db.Integer, default=0)
 	date_created = db.Column(db.DateTime())
 
 
@@ -34,5 +32,5 @@ class Comment(db.Model):
 	email = db.Column(db.String(255))
 	password = db.Column(db.String(255))
 	content = db.Column(db.Text())
-	count = db.Column(db.Integer)
+	like = db.Column(db.Integer, default=0)
 	date_created = db.Column(db.DateTime())
