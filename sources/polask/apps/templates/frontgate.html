@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block frontgate %}
+
+<div id="maximage">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_02.jpg') }}" width="1440px" height="740px">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_01.jpg') }}" width="1440px" height="740px">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_03.jpg') }}" width="1440px" height="740px">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_04.jpg') }}" width="1440px" height="740px">
+</div>
+
+<div class="title">
+	<p>Polask</p>
+</div>
+
+<div class="llArticleCreate" id="login">
+    <form role="form" method="post">
+
+        {% block messages %}
+            {% include "messages.html" %}
+        {% endblock %}
+
+        {{ form.hidden_tag() }}
+
+        {% if form.errors %}
+            <div class="alert alert-danger fade in">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                {% for field, errors in form.errors.items() %}
+                    <ul>
+                        {% for error in errors %}
+                            <i class="fa fa-frown-o"></i>
+                            {{ error }}
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% from "_form_field.html" import render_field %}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ render_field(field, class="form-control") }}
+        {% endfor %}
+        <a href="{{ url_for('user_join') }}" class="btn btn-default">회원가입</a>
+        <button type="submit" class="btn btn-primary float-right" >로그인</button>
+    </form>
+</div>
+
+{% endblock %}
+

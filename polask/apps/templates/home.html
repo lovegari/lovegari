@@ -9,7 +9,7 @@
 					<div class="llArticleDetail">
 						<button type="button" class="btn btn-warning float-right">
 							<i class="fa fa-thumbs-o-up"></i>
-							<strong>좋아요</strong>
+							<strong>Like</strong>
 							<span>{{ article.like }}</span>
 							<input name="id" type="hidden" value="{{ article.id }}"/>
 						</button>
@@ -24,7 +24,7 @@
 			{% endfor %}
 		{% else %}
 			<div class="no-list">
-				글이 존재하지 않습니다. 새로운 글을 등록해주세요.
+				There is no post. Upload your own post!
 			</div>
 		{% endif %}
 	</div>

@@ -40,8 +40,8 @@
         {% for field in form if field.widget.input_type != 'hidden' %}
             {{ render_field(field, class="form-control") }}
         {% endfor %}
-        <a href="{{ url_for('user_join') }}" class="btn btn-default">회원가입</a>
-        <button type="submit" class="btn btn-primary float-right" >로그인</button>
+        <a href="{{ url_for('user_join') }}" class="btn btn-default">Join</a>
+        <button type="submit" class="btn btn-primary float-right" >Log In</button>
     </form>
 </div>
 

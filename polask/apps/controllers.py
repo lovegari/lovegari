@@ -42,7 +42,7 @@ def frontgate():
 			try: 
 				user = db.session.query(User).filter(User.email==email).one() 
 				if not check_password_hash(user.password, password): 
-					flash(u'이메일 혹은 비밀번호가 올바르지 않습니다.', 'danger') 
+					flash(u'이메일 혹은 비밀번호를 확인해주세요.', 'danger') 
 					return render_template('frontgate.html', form=form, active_tab='log_in') 
 				else: 
 					session.permanent = True 
@@ -54,7 +54,7 @@ def frontgate():
 					return redirect(url_for('article_list')) 
 
 			except NoResultFound, e: 
-				flash(u'이메일 혹은 비밀번호가 올바르지 않습니다.', 'danger') 
+				flash(u'이메일 혹은 비밀번호를 확인해주세요.', 'danger') 
 				return render_template('frontgate.html', form=form, active_tab='log_in') 
 
 	#if GET
@@ -229,7 +229,7 @@ def log_in():
 			try: 
 				user = db.session.query(User).filter(User.email==email).one() 
 				if not check_password_hash(user.password, password): 
-					flash(u'이메일 혹은 비밀번호가 올바르지 않습니다.', 'danger') 
+					flash(u'이메일 혹은 비밀번호를 확인해주세요.', 'danger') 
 					return render_template('user/login.html', form=form, active_tab='log_in') 
 				else: 
 					session.permanent = True 
@@ -240,7 +240,7 @@ def log_in():
 					flash(u'로그인 되었습니다.', 'success')
 					return redirect(url_for('article_list')) 
 			except NoResultFound, e: 
-				flash(u'이메일 혹은 비밀번호가 올바르지 않습니다.', 'danger') 
+				flash(u'이메일 혹은 비밀번호를 확인해주세요.', 'danger') 
 				return render_template('user/login.html', form=form, active_tab='log_in') 
 
 	#if GET

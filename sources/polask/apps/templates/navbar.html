@@ -1,0 +1,56 @@
+<header class="cd-header">
+    <div class="cd-logo"><a href="{{ url_for('frontgate') }}">Polask</a></div>
+
+    <nav>
+        <ul class="cd-secondary-nav">
+            <li><a href="{{ url_for('log_in') }}">Log In</a></li>
+            <li><a href="{{ url_for('user_join') }}">Register</a></li>
+        </ul>
+    </nav> <!-- cd-nav -->
+
+    <a class="cd-primary-nav-trigger" href="#0">
+        <span class="cd-menu-text">Menu</span><span class="cd-menu-icon"></span>
+    </a> <!-- cd-primary-nav-trigger -->
+</header>
+
+<nav>
+    <ul class="cd-primary-nav">
+        <li class="cd-label">About us</li>
+
+        <li><a href="{{ url_for('article_list') }}">타임라인</a></li>
+        <li><a href="{{ url_for('article_create') }}">글쓰기</a></li>
+        <li><a href="#0">Our projects</a></li>
+
+        <li class="cd-label">Work with us</li>
+
+        <li><a href="#0">Start a project</a></li>
+        <li><a href="#0">Join In</a></li>
+        <li><a href="#0">Create an account</a></li>
+
+        <li class="cd-label">Follow us</li>
+        
+        <li class="cd-social cd-facebook"><a href="#0">Facebook</a></li>
+        <li class="cd-social cd-instagram"><a href="#0">Instagram</a></li>
+        <li class="cd-social cd-dribbble"><a href="#0">Dribbble</a></li>
+        <li class="cd-social cd-twitter"><a href="#0">Twitter</a></li>
+    </ul>
+</nav>
+
+<!-- <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">        
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('frontgate') }}">Polask</a>
+        </div>
+        <ul class="nav navbar-nav">
+            {% if g.user_name != None %}
+                <li{% if active_tab == 'timeline' %} class="active"{% endif %}><a href="{{ url_for('article_list') }}">타임라인</a></li>
+                <li{% if active_tab == 'article_create' %} class="active"{% endif %}><a href="{{ url_for('article_create') }}">건의하기</a></li>
+                <li><a href="">{{ g.user_name }} 님 안녕하세요.</a></li>
+                <li><a href = "{{ url_for('log_out')}}">로그아웃</a></li>
+            {% else %}
+                <li{% if active_tab == 'log_in' %} class="active"{% endif %}><a href="{{ url_for('log_in') }}">로그인</a></li>
+                <li{% if active_tab == 'user_join' %} class="active"{% endif %}><a href="{{ url_for('user_join') }}">회원가입</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav> -->

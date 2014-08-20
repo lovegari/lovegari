@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+<div id="maximage">
+    <img src="{{ url_for('static', filename='images/login_bg_02.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_01.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_03.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_04.jpg') }}" width="1440px" height="740px">
+    <img src="{{ url_for('static', filename='images/login_bg_05.jpg') }}" width="1440px" height="740px">
+</div>
+
+<div class="llCommentCreate" id="join">
+    <form role="form" method="post">
+        <p style="font-size:60px; text-shadow: 1px 1px 5px black;">회원가입</p>
+        <p style="font-size:20px; text-shadow: 1px 1px 5px black;">1단계 : 기본 정보 입력</p>
+        <br>
+        
+        {% block messages %}
+            {% include "messages.html" %}
+        {% endblock %}
+
+        {{ form.hidden_tag() }}
+
+        {% if form.errors %}
+            <div class="alert alert-danger fade in">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                {% for field, errors in form.errors.items() %}
+                    <ul>
+                        {% for error in errors %}
+                            <i class="fa fa-frown-o"></i>
+                            {{ error }}
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% from "_form_field.html" import render_field %}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ render_field(field, class="form-control") }}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary float-right">다음단계</button>
+    </form>
+</div>
+{% endblock %}
