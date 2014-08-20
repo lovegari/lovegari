@@ -6,10 +6,15 @@
 
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">작성자 : {{ article.author }}<span class="float-right">{{ article.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span></h3>
+                <h3 class="panel-title">작성자 : {{ article.author }}<span class="float-right"> <span class="badge">{{ article.category }}</span> 작성시간 : {{ article.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span></h3>
             </div>
             <div class="panel-body">
-                <a href="{{ url_for('article_like', id=article.id) }}" class="btn btn-warning btn-sm float-right"><i class="fa fa-thumbs-o-up"></i> 좋아요 {{ article.like }}</a>
+                <button type="button" class="btn btn-warning float-right">
+                    <i class="fa fa-thumbs-o-up"></i>
+                    <strong>좋아요</strong>
+                    <span>{{ article.like }}</span>
+                    <input name="id" type="hidden" value="{{ article.id }}"/>
+                </button>
                 {{ article.content|safe }}
             </div>
         </div>
@@ -27,7 +32,11 @@
                             <small>
                                 <a href="mailto:{{ comment.email }}">{{ comment.email }}</a> <em>{{ comment.date_created.strftime('%Y-%m-%d %H:%M:%S') }}   </em>
                             </small>
-                            <a href="{{ url_for('comment_like', id=comment.id) }}" class="btn btn-warning btn-xs"><i class="fa fa-thumbs-o-up"></i> {{ comment.like }}</a>
+                            <button type="button" class="btn btn-warning btn-xs">
+                                <i class="fa fa-thumbs-o-up"></i>
+                                <span>{{ comment.like }}</span>
+                                <input name="id" type="hidden" value="{{ comment.id }}"/>
+                            </button>
                         </span>
                     </div>
                 {% endfor %}

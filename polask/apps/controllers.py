@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from kstime import kstime
-from flask import render_template, request, redirect, url_for, flash, g, session
+from flask import render_template, request, redirect, url_for, flash, g, session, jsonify
 from werkzeug.security import generate_password_hash, \
 	 check_password_hash #암호를 암호화한다
 from sqlalchemy import desc
@@ -125,14 +125,16 @@ def article_delete(id):
 		flash(u'게시글을 삭제하였습니다.', 'success')
 		return redirect(url_for('article_list'))
 
-@app.route('/article/like/<int:id>', methods=['GET'])
-def article_like(id):
+@app.route('/article/detail_like', methods=['GET'])
+def article_like_ajax():
+	id = request.args.get('id',0,type=int)
+
 	article = Article.query.get(id)
 	article.like += 1
 
 	db.session.commit()
 
-	return redirect(url_for('article_detail', id=id))
+	return jsonify(id=id)
 #
 # @comment controllers
 #
@@ -177,15 +179,17 @@ def comment_delete(id):
 		flash(u'경고! 댓글이 완전히 삭제되니, 다시 한번 확인하시기 바랍니다.', 'warning')
 		return render_template('comment/delete.html', comment_id=id)
 
-@app.route('/comment/like/<int:id>', methods=['GET'])
-def comment_like(id):
+@app.route('/comment/detail_like', methods=['GET'])
+def comment_like_ajax():
+	id = request.args.get('id',0,type=int)
+
 	comment = Comment.query.get(id)
-	article_id = comment.article_id
 	comment.like += 1
 
 	db.session.commit()
 
-	return redirect(url_for('article_detail', id=article_id))
+	return jsonify(id=id)
+
 #
 # @Join controllers
 #
