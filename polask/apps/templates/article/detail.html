@@ -6,7 +6,7 @@
 
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Author : {{ article.author }}<span class="float-right"> <span class="badge">{{ article.category }}</span> Time : {{ article.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span></h3>
+                <h3 class="panel-title">{{ article.author }}<span class="float-right"> <span class="badge">{{ article.category }}</span>{{ article.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span></h3>
             </div>
             <div class="panel-body">
                 <button type="button" class="btn btn-warning float-right">

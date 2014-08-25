@@ -1,13 +1,13 @@
 """empty message
 
-Revision ID: 36b0e64c4425
+Revision ID: 4661016a95e5
 Revises: None
-Create Date: 2014-08-19 04:07:19.021027
+Create Date: 2014-08-24 21:48:33.207029
 
 """
 
 # revision identifiers, used by Alembic.
-revision = '36b0e64c4425'
+revision = '4661016a95e5'
 down_revision = None
 
 from alembic import op
@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('content', sa.Text(), nullable=True),
     sa.Column('author', sa.String(length=255), nullable=True),
     sa.Column('category', sa.String(length=255), nullable=True),
-    sa.Column('count', sa.Integer(), nullable=True),
+    sa.Column('like', sa.Integer(), nullable=True),
     sa.Column('date_created', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -41,7 +41,7 @@ def upgrade():
     sa.Column('email', sa.String(length=255), nullable=True),
     sa.Column('password', sa.String(length=255), nullable=True),
     sa.Column('content', sa.Text(), nullable=True),
-    sa.Column('count', sa.Integer(), nullable=True),
+    sa.Column('like', sa.Integer(), nullable=True),
     sa.Column('date_created', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['article_id'], ['article.id'], ),
     sa.PrimaryKeyConstraint('id')

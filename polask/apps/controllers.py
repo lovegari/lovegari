@@ -7,11 +7,15 @@ from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 from apps import app, db
 
+import urllib
+import json
+
 from apps.forms import ArticleForm, CommentForm, JoinForm, LoginForm
 from apps.models import (
 	Article,
 	Comment,
-	User
+	User,
+	Bill
 )
 
 #
@@ -60,10 +64,6 @@ def frontgate():
 	#if GET
 	return render_template('frontgate.html', form = form, active_tab='log_in')
 
-@app.route('/login/interest', methods=['GET', 'POST'])
-def login_interest():
-	return render_template("login/interest.html")
-
 @app.route('/list', methods=['GET'])
 def article_list():
 	context = {}
@@ -75,7 +75,7 @@ def article_list():
 def article_create():
 	form = ArticleForm()
 	if request.method == 'POST':
-		if form.validate_on_submit(): # 여기까지 했습니다~
+		if form.validate_on_submit():
 
 			article = Article(
 				title = form.title.data,
@@ -243,14 +243,60 @@ def log_in():
 				flash(u'이메일 혹은 비밀번호를 확인해주세요.', 'danger') 
 				return render_template('user/login.html', form=form, active_tab='log_in') 
 
-	#if GET
 	return render_template('user/login.html', form = form, active_tab='log_in')
 
 @app.route('/logout')
 def log_out():
 	session.clear()
-	#if GET
+
 	return redirect(url_for('frontgate'))
+
+
+
+@app.route('/bill/list')
+def bill_list():
+
+	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc")
+	data = json.load(htmltext)
+
+	items = data['items']
+
+	for number in range(len(items)):
+		items = data['items'][number]
+		bill_id = items['id']
+		name = items['name']
+		proposed_date = items['proposed_date']
+		sponsor = items['sponsor']
+		status = items['status']
+		summary = items['summary']
+
+		bill = Bill(
+			bill_id = bill_id,
+			title = name,
+			name = sponsor,
+			proposed_date = proposed_date,
+			status = status,
+			content = summary
+		)
+
+		db.session.add(bill)
+		db.session.commit()
+
+	context = {}
+	context['bill_list'] = Bill.query.order_by(desc(Bill.proposed_date)).all()
+
+	return render_template("bill/list.html", context=context)
+
+@app.route('/bill/detail/<int:id>', methods=['GET'])
+def bill_detail(id):
+	bill = Bill.query.get(id)
+	
+	return render_template('bill/detail.html', bill=bill)
+
+@app.route('/bill/timeline', methods=['GET'])
+def bill_timeline():
+	
+	return render_template('bill/timeline.html')
 
 #
 # @error Handlers

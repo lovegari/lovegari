@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.maximage.min.css') }}" type="text/css" media="screen" title="CSS" charset="utf-8" />
 	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/earlyaccess/jejugothic.css' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
 
 	{% block favicon %}
@@ -21,18 +22,31 @@
 	{% endblock %}
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&appId=933271900022749&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 {% block layout %}{% endblock %}
 {% block frontgate %}{% endblock %}
 
 {% block scripts %}
-	<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/summernote.js') }}"></script>
 
-	<script src="{{ url_for('static', filename='js/jquery.cycle.all.js') }}" type="text/javascript"></script>
-	<script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}" type="text/javascript"></script>
-	<script src="{{ url_for('static', filename='js/jquery.maximage.min.js') }}" type="text/javascript"></script>
-	<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/summernote.js') }}"></script>
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/jquery.cycle.all.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/jquery.maximage.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+<script src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
+
 {% endblock %}
 </body>
 </html>

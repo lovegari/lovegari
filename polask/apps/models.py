@@ -21,7 +21,6 @@ class Article(db.Model):
 	like = db.Column(db.Integer, default=0)
 	date_created = db.Column(db.DateTime())
 
-
 class Comment(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	article_id = db.Column(db.Integer, db.ForeignKey('article.id'))
@@ -34,3 +33,12 @@ class Comment(db.Model):
 	content = db.Column(db.Text())
 	like = db.Column(db.Integer, default=0)
 	date_created = db.Column(db.DateTime())
+
+class Bill(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	bill_id = db.Column(db.Integer)
+	title = db.Column(db.String(255))
+	name = db.Column(db.String(255))
+	proposed_date = db.Column(db.String(255))
+	status = db.Column(db.String(255))
+	content = db.Column(db.String(255))

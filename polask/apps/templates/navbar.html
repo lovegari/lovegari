@@ -1,42 +1,55 @@
 <header class="cd-header">
-    <div class="cd-logo"><a href="{{ url_for('frontgate') }}" style="color:white;">Polask</a></div>
+		{% if g.user_name != None %}
+		<div class="cd-logo"><a href="{{ url_for('article_list') }}" style="color:white;">Polask</a></div>
+		{% else %}
+		<div class="cd-logo"><a href="{{ url_for('frontgate') }}" style="color:white;">Polask</a></div>
+		{% endif %}
 
-    <nav>
-        <ul class="cd-secondary-nav">
-            <li><a href="{{ url_for('log_in') }}">Log In</a></li>
-            <li><a href="{{ url_for('user_join') }}">Register</a></li>
-        </ul>
-    </nav> <!-- cd-nav -->
+		<nav>
+				<ul class="cd-secondary-nav">
+						{% if g.user_name != None %}
+						<li><a href="">{{ g.user_name }}님 안녕하세요!</a></li>
+						<li><a href = "{{ url_for('log_out')}}">Log Out</a></li>
+						{% else %}
+						<li><a href="{{ url_for('log_in') }}">Log In</a></li>
+						<li><a href="{{ url_for('user_join') }}">Register</a></li>
+						{% endif %}
+				</ul>
+		</nav> <!-- cd-nav -->
 
-    <a class="cd-primary-nav-trigger" href="#0">
-        <span class="cd-menu-text">Menu</span><span class="cd-menu-icon"></span>
-    </a> <!-- cd-primary-nav-trigger -->
+		<a class="cd-primary-nav-trigger" href="#0">
+				<span class="cd-menu-text">Menu</span><span class="cd-menu-icon"></span>
+		</a> <!-- cd-primary-nav-trigger -->
 </header>
 
 <nav>
-    <ul class="cd-primary-nav">
-        <li class="cd-label">Option</li>
+		<ul class="cd-primary-nav">
+				<li class="cd-label">Option</li>
 
-        <li><a href="">People</a></li>
-        <li><a href="">Bill</a></li>
-        <li><a href="#0">Party</a></li>
-        <li><a href="{{ url_for('article_list') }}">Timeline</a></li>
+				<li><a href="">People</a></li>
+				<li><a href="{{ url_for('bill_list') }}">Bill</a></li>
+				<li><a href="{{ url_for('bill_timeline') }}">Party</a></li>
+				<li><a href="{{ url_for('article_list') }}">Timeline</a></li>
 
-        <li class="cd-label">Membership</li>
+				<li class="cd-label">Membership</li>
+				
+				{% if g.user_name != None %}
+				<li><a href = "{{ url_for('log_out')}}">Log Out</a></li>
+				{% else %}
+				<li><a href="{{ url_for('user_join') }}">Join</a></li>
+				<li><a href="{{ url_for('log_in') }}">Log In</a></li>
+				{% endif %}
+				<li><a href="{{ url_for('article_create') }}">Request</a></li>
 
-        <li><a href="{{ url_for('user_join') }}">Join</a></li>
-        <li><a href="{{ url_for('log_in') }}">Log In</a></li>
-        <li><a href="{{ url_for('article_create') }}">Request</a></li>
-
-        <li class="cd-label">Follow us</li>
-        
-        <li class="cd-social cd-facebook"><a href="#0">Facebook</a></li>
-        <li class="cd-social cd-instagram"><a href="#0">Instagram</a></li>
-        <li class="cd-social cd-dribbble"><a href="#0">Dribbble</a></li>
-        <li class="cd-social cd-twitter"><a href="#0">Twitter</a></li>
-    </ul>
+				<li class="cd-label">Follow us</li>
+				
+				<li class="cd-social cd-facebook"><a href="https://www.facebook.com/lovegari">Facebook</a></li>
+				<li class="cd-social cd-instagram"><a href="http://instagram.com/lovegari">Instagram</a></li>
+				<li class="cd-social cd-dribbble"><a href="http://blog.naver.com/shilamon">Dribbble</a></li>
+				<li class="cd-social cd-twitter"><a href="https://twitter.com/lovegari">Twitter</a></li>
+		</ul>
 </nav>
 
 <section class="cd-intro">
-    <div id="up"></div>
+		<div id="up"></div>
 </section>
