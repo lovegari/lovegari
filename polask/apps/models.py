@@ -37,8 +37,4 @@ class Comment(db.Model):
 class Bill(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	bill_id = db.Column(db.Integer)
-	title = db.Column(db.String(255))
-	name = db.Column(db.String(255))
-	proposed_date = db.Column(db.String(255))
-	status = db.Column(db.String(255))
-	content = db.Column(db.String(255))
+	like = db.Column(db.Integer, default=0)

@@ -3,32 +3,35 @@
 {% extends "layout.html" %}
 
 {% block contents %}
-    <div class="llFlaskrArticleForm" style="width:300px; margin:0 auto">
-        <form role="form" method="post" class="llFlaskrArticleForm">
-        <p style="font-size:60px; color:rgba(2, 23, 37, 0.4); text-align: center;">건의하기</p>
-        <p style="font-size:20px; color:rgba(2, 23, 37, 0.4); text-align: center;">무엇이든 말씀해주세요</p>
-        <br>           
-            {{ form.hidden_tag() }}
+<header>
+</header>
 
-            {% if form.errors %}
-                <div class="alert alert-danger fade in">
-                    <a class="close" data-dismiss="alert" href="#">&times;</a>
-                    {% for field, errors in form.errors.items() %}
-                        <ul>
-                            {% for error in errors %}
-                                {{ error }}
-                            {% endfor %}
-                        </ul>
-                    {% endfor %}
-                </div>
-            {% endif %}
+<div class="llFlaskrArticleForm" style="width:300px; margin:0 auto">
+    <form role="form" method="post" class="llFlaskrArticleForm">
+    <p style="font-size:60px; color:rgba(2, 23, 37, 0.4); text-align: center;">건의하기</p>
+    <p style="font-size:20px; color:rgba(2, 23, 37, 0.4); text-align: center;">무엇이든 말씀해주세요</p>
+    <br>           
+        {{ form.hidden_tag() }}
 
-            {% from "_form_field.html" import render_field %}
-            {% for field in form if field.widget.input_type != 'hidden' %}
-                {{ render_field(field, class="form-control") }}
-            {% endfor %}
+        {% if form.errors %}
+            <div class="alert alert-danger fade in">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                {% for field, errors in form.errors.items() %}
+                    <ul>
+                        {% for error in errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-            <button type="submit" class="btn btn-primary float-right">Upload</button>
-        </form>
-    </div>
+        {% from "_form_field.html" import render_field %}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ render_field(field, class="form-control") }}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary float-right">Upload</button>
+    </form>
+</div>
 {% endblock %}

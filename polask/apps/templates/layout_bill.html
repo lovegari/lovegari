@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block layout %}
+    {% block navbar %}
+        {% include "navbar.html" %}
+    {% endblock %}
+
+    <section class="cd-intro">
+		<h1>Bill</h1>
+	</section>
+
+    <div class="container">
+        {% block contents %}{% endblock %}
+    </div>
+{% endblock %}

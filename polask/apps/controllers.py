@@ -255,43 +255,42 @@ def log_out():
 
 @app.route('/bill/list')
 def bill_list():
-
-	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc")
+	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc&per_page=50")
 	data = json.load(htmltext)
 
 	items = data['items']
+	context = {}
 
 	for number in range(len(items)):
 		items = data['items'][number]
-		bill_id = items['id']
-		name = items['name']
-		proposed_date = items['proposed_date']
-		sponsor = items['sponsor']
-		status = items['status']
-		summary = items['summary']
+		context[number] = items
 
-		bill = Bill(
-			bill_id = bill_id,
-			title = name,
-			name = sponsor,
-			proposed_date = proposed_date,
-			status = status,
-			content = summary
+		bill = Bill (
+			bill_id = context[number]['id']
 		)
 
 		db.session.add(bill)
 		db.session.commit()
 
-	context = {}
-	context['bill_list'] = Bill.query.order_by(desc(Bill.proposed_date)).all()
-
 	return render_template("bill/list.html", context=context)
 
 @app.route('/bill/detail/<int:id>', methods=['GET'])
 def bill_detail(id):
-	bill = Bill.query.get(id)
+	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/"+ str(id) +"?api_key=test")
+	bill = json.load(htmltext)
 	
 	return render_template('bill/detail.html', bill=bill)
+
+@app.route('/bill/detail_like', methods=['GET'])
+def bill_like_ajax():
+	id = request.args.get('id',0,type=int)
+
+	bill = Bill.query.get(id)
+	bill.like += 1
+
+	db.session.commit()
+
+	return jsonify(id=id)
 
 @app.route('/bill/timeline', methods=['GET'])
 def bill_timeline():

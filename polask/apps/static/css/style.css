@@ -21,6 +21,51 @@ a {
 }
 
 
+.cd-intro {
+  position: relative;
+  height: 100%;
+  background: url("../images/cd-background-img.jpg") no-repeat center center;
+  background-size: cover;
+  z-index: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.cd-intro h1 {
+  position: absolute;
+  width: 90%;
+  max-width: 1170px;
+  left: 50%;
+  top: 13%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  color: white;
+  font-size: 40px;
+  font-size: 4.25rem;
+  font-weight: 400;
+  text-align: center;
+}
+@media only screen and (min-width: 768px) {
+  .cd-intro h1 {
+    font-size: 40px;
+    font-size: 4.875rem;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .cd-intro {
+    height: 800px;
+  }
+}
+
+#up {
+	height: 80px;
+	background-color: rgba(61, 86, 109, 0.6);
+}
+
 .no-list {
 	padding: 10px;
 	text-align: center;
@@ -176,7 +221,7 @@ html, body {
 	}
 	.cd-header.menu-is-open {
 		/* add a background color to the header when the navigation is open */
-		background-color: rgba(61, 86, 109, 0.6);
+		background-color: rgba(61, 86, 109, 0.9);
 	}
 }
 
@@ -347,7 +392,7 @@ html, body {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	background: rgba(61, 86, 109, 0.6);
+	background: rgba(61, 86, 109, 0.9);
 	z-index: 2;
 	text-align: center;
 	padding: 50px 0;
@@ -389,7 +434,7 @@ html, body {
 	font-size: 1.3em;
 }
 .no-touch .cd-primary-nav a:hover {
-  background-color: #e36767;
+  background-color: rgb(81, 183, 197);
 }
 .cd-primary-nav .cd-label {
 	color: white;
@@ -447,16 +492,6 @@ html, body {
 		font-size: 16px;
 		font-size: 1rem;
 	}
-}
-
-.cd-intro {
-	position: relative;
-	height: 120px;
-	background: no-repeat center center;
-	background-size: cover;
-	z-index: 1;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 
 #up {
