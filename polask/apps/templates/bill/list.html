@@ -7,9 +7,9 @@
 			{% for number in range(context|length) %}
 				<div class="cd-timeline-block">
 
-					{% if context[number]['status_id'] == (1 or 2 or 4 or 5) %}
+					{% if context[number]['status_id'] == (1 or 2 or 4 or 5 or 11) %}
 						<div class="cd-timeline-img cd-location">
-					{% elif context[number]['status_id'] == (7 or 9) %}
+					{% elif context[number]['status_id'] == (6 or 7 or 9) %}
 						<div class="cd-timeline-img cd-picture">
 					{% else %}
 						<div class="cd-timeline-img cd-movie">
@@ -22,9 +22,10 @@
 						<p>{{ context[number]['sponsor'] }}</p>
 						<span class="cd-date">{{ context[number]['proposed_date'] }}</span>
 						
-						<button type="button" class="btn btn-warning float-right">
+						<button type="button" class="btn btn-warning float-right bill-like">
 							<i class="fa fa-thumbs-o-up"></i>
 							<strong>Like</strong>
+							<span>{{ bill.like }}</span>
 							<input name="id" type="hidden" value="{{ context[number]['id'] }}"/>
 						</button>
 

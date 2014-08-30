@@ -35,6 +35,5 @@ class Comment(db.Model):
 	date_created = db.Column(db.DateTime())
 
 class Bill(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	bill_id = db.Column(db.Integer)
+	bill_id = db.Column(db.Integer, primary_key=True)
 	like = db.Column(db.Integer, default=0)

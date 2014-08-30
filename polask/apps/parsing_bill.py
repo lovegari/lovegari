@@ -53,7 +53,7 @@ import json
 # print bill['name']
 
 
-htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc&per_page=1000")
+htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&status_id=12&order=asc&per_page=1000")
 
 data = json.load(htmltext)
 

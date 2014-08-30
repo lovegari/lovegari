@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, \
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 from apps import app, db
+from random import randint
 
 import urllib
 import json
@@ -251,11 +252,9 @@ def log_out():
 
 	return redirect(url_for('frontgate'))
 
-
-
 @app.route('/bill/list')
 def bill_list():
-	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc&per_page=50")
+	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc&per_page=20")
 	data = json.load(htmltext)
 
 	items = data['items']
@@ -269,10 +268,14 @@ def bill_list():
 			bill_id = context[number]['id']
 		)
 
-		db.session.add(bill)
-		db.session.commit()
+		try:
+			db.session.add(bill)
+			db.session.commit()
 
-	return render_template("bill/list.html", context=context)
+		except:
+			pass
+		
+	return render_template("bill/list.html", context=context, bill=bill)
 
 @app.route('/bill/detail/<int:id>', methods=['GET'])
 def bill_detail(id):
@@ -296,6 +299,27 @@ def bill_like_ajax():
 def bill_timeline():
 	
 	return render_template('bill/timeline.html')
+
+@app.route('/people/list')
+def people_list():
+	htmltext = urllib.urlopen("http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9")
+	data = json.load(htmltext)
+
+	items = data['items']
+	context = {}
+
+	for number in range(len(items)):
+		items = data['items'][number]
+		context[number] = items
+
+		# bill = Bill (
+		# 	bill_id = context[number]['id']
+		# )
+
+		# db.session.add(bill)
+		# db.session.commit()
+
+	return render_template("people/list.html", context=context)
 
 #
 # @error Handlers
