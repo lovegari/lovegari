@@ -303,7 +303,7 @@ def bill_timeline():
 
 @app.route('/person/list')
 def person_list():
-	htmltext = urllib.urlopen("http://api.popong.com/v0.1/person/?api_key=test&order=desc&per_page=9")
+	htmltext = urllib.urlopen("http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9")
 	data = json.load(htmltext)
 
 	items = data['items']
