@@ -8,7 +8,11 @@
 		<li>
 
 			<ul class="cd-item-wrapper">
+				{% if context[number]['image'] != None %}
 				<li class="cd-item-front"><a href="#0"><img src="{{ context[number]['image'] }}" alt="Preview image"></a></li>
+				{% else %}
+				<li class="cd-item-front"><a href="#0"><img src="{{ url_for('static', filename='images/person_profile_image.jpg" alt="Preview image"></a></li>
+				{% endif %}
 				<li class="cd-item-middle"><a href="#0"><img src="{{ url_for('static', filename='images/thumb-5.jpg') }}" alt="Preview image"></a></li>
 				<li class="cd-item-back"><a href="#0"><img src="{{ url_for('static', filename='images/thumb-5.jpg') }}" alt="Preview image"></a></li>
 				<li class="cd-item-out"><a href="#0"><img src="{{ url_for('static', filename='images/thumb-5.jpg') }}" alt="Preview image"></a></li>
@@ -16,15 +20,13 @@
 			</ul> <!-- cd-item-wrapper -->
 
 			<div class="cd-item-info">
-				<b><a href="#0"><strong>{{ context[number]['name'] }}</strong> <small>의원                            
-				<button type="button" class="btn btn-warning btn-xs">
-                    <i class="fa fa-thumbs-o-up"></i>
-                    <input name="id" type="hidden" value=""/>
-                </button>
-                </small></a></b>
-				<em>세월호				
-
-				</em>
+				<b><a href="#0"><strong>{{ context[number]['name'] }}</strong></a>의원</b>
+				<button type="button" class="btn btn-warning btn-xs person-like">
+					<i class="fa fa-thumbs-o-up"></i>
+					<span>{{ person.like }}</span>
+					<input name="id" type="hidden" value="{{ context[number]['id'] }}"/>
+				</button>
+				<em>세월호</em>
 			</div> <!-- cd-item-info -->
 
 			<nav>

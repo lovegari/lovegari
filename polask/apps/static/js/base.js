@@ -70,6 +70,24 @@ $(document).ready(function () {
 		});
 	});
 
+	$('.cd-item-info').on( "click", ".person-like", function () {
+		var cur_item = $(this);
+		$.ajax({
+				url: "/person/detail_like",
+				dataType:'JSON',
+				data: {
+						id : cur_item.children().last().val()
+				},
+				success: function() {
+						var cur_value = cur_item.children().last().prev().text();
+						cur_item.children().last().prev().text(parseInt(cur_value) + 1);
+				},
+				error: function(request,status,error){
+						alert("code:"+request.status+"\n"+"error:"+error);
+				}
+		});
+	});
+
 //if you change this breakpoint in the style.css file (or _layout.scss if you use SASS), don't forget to update this value as well
 		var MQL = 1170;
 

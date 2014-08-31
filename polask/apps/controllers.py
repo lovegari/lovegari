@@ -16,7 +16,8 @@ from apps.models import (
 	Article,
 	Comment,
 	User,
-	Bill
+	Bill,
+	Person
 )
 
 #
@@ -302,7 +303,7 @@ def bill_timeline():
 
 @app.route('/person/list')
 def person_list():
-	htmltext = urllib.urlopen("http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9")
+	htmltext = urllib.urlopen("http://api.popong.com/v0.1/person/?api_key=test&order=desc&per_page=9")
 	data = json.load(htmltext)
 
 	items = data['items']
@@ -312,14 +313,29 @@ def person_list():
 		items = data['items'][number]
 		context[number] = items
 
-		# bill = Bill (
-		# 	bill_id = context[number]['id']
-		# )
+		try:
+			person = Person (
+				person_id = context[number]['id']
+			)
 
-		# db.session.add(bill)
-		# db.session.commit()
+			db.session.add(person)
+			db.session.commit()
 
-	return render_template("person/list.html", context=context)
+		except:
+			pass
+
+	return render_template("person/list.html", context=context, person=person)
+
+@app.route('/person/detail_like', methods=['GET'])
+def person_like_ajax():
+	id = request.args.get('id',0,type=int)
+
+	person = Person.query.get(id)
+	person.like += 1
+
+	db.session.commit()
+
+	return jsonify(id=id)
 
 #
 # @error Handlers

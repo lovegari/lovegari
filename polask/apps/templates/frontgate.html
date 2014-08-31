@@ -3,10 +3,10 @@
 {% block frontgate %}
 
 <div id="maximage">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_02.jpg') }}" width="1440px" height="740px">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_01.jpg') }}" width="1440px" height="740px">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_03.jpg') }}" width="1440px" height="740px">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_04.jpg') }}" width="1440px" height="740px">
+  <img src="{{ url_for('static', filename='images/frontgate_bg_02.jpg') }}">
+  <img src="{{ url_for('static', filename='images/frontgate_bg_01.jpg') }}">
+  <img src="{{ url_for('static', filename='images/frontgate_bg_03.jpg') }}">
+  <img src="{{ url_for('static', filename='images/frontgate_bg_04.jpg') }}">
 </div>
 
 <div class="title">
@@ -46,6 +46,8 @@
 	</form>
 	<div class="fb-login-button float-right" id="facebook-btn" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="false"></div>
 </div>
+
+
 
 {% endblock %}
 

@@ -37,3 +37,7 @@ class Comment(db.Model):
 class Bill(db.Model):
 	bill_id = db.Column(db.Integer, primary_key=True)
 	like = db.Column(db.Integer, default=0)
+
+class Person(db.Model):
+	person_id = db.Column(db.Integer, primary_key=True)
+	like = db.Column(db.Integer, default=0)
