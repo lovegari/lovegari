@@ -264,17 +264,17 @@ def bill_list():
 		items = data['items'][number]
 		context[number] = items
 
-		bill = Bill (
-			bill_id = context[number]['id']
-		)
-
 		try:
+			bill = Bill (
+				bill_id = context[number]['id']
+			)
+
 			db.session.add(bill)
 			db.session.commit()
 
 		except:
 			pass
-		
+			
 	return render_template("bill/list.html", context=context, bill=bill)
 
 @app.route('/bill/detail/<int:id>', methods=['GET'])
@@ -300,8 +300,8 @@ def bill_timeline():
 	
 	return render_template('bill/timeline.html')
 
-@app.route('/people/list')
-def people_list():
+@app.route('/person/list')
+def person_list():
 	htmltext = urllib.urlopen("http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9")
 	data = json.load(htmltext)
 
@@ -319,7 +319,7 @@ def people_list():
 		# db.session.add(bill)
 		# db.session.commit()
 
-	return render_template("people/list.html", context=context)
+	return render_template("person/list.html", context=context)
 
 #
 # @error Handlers

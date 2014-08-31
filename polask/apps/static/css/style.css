@@ -31,10 +31,10 @@ a {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#intro-people {
+#intro-person {
   position: relative;
   height: 100%;
-  background: url("../images/cd-background-img-people.jpg") no-repeat center center;
+  background: url("../images/cd-background-img-person.jpg") no-repeat center center;
   background-size: cover;
   z-index: 1;
   -webkit-font-smoothing: antialiased;
@@ -75,7 +75,7 @@ a {
   #intro-bill {
     height: 700px;
   }
-  #intro-people {
+  #intro-person {
     height: 700px;
   }
 }
