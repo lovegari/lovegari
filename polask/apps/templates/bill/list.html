@@ -3,34 +3,34 @@
 {% block contents %}
 
 	<section id="cd-timeline" class="cd-container">
-		{% if context %}
-			{% for number in range(context|length) %}
+		{% if context.bill_list %}
+			{% for bill in context.bill_list %}
 				<div class="cd-timeline-block">
 
-					{% if context[number]['status_id'] == (1 or 2 or 4 or 5 or 11) %}
+					{% if bill.status_id == (1 or 2 or 4 or 5 or 11) %}
 						<div class="cd-timeline-img cd-location">
-					{% elif context[number]['status_id'] == (6 or 7 or 9) %}
+					{% elif bill.status_id == (6 or 7 or 9) %}
 						<div class="cd-timeline-img cd-picture">
 					{% else %}
 						<div class="cd-timeline-img cd-movie">
 					{% endif %}
-						<span class="cd-date">{{ context[number]['status'] }}</span>
+						<span class="cd-date">{{ bill.status }}</span>
 					</div> <!-- cd-timeline-img -->
 
-					<div class="cd-timeline-content">
-						<h2>{{ context[number]['name'] }}</h2>
-						<p>{{ context[number]['sponsor'] }}</p>
-						<span class="cd-date">{{ context[number]['proposed_date'] }}</span>
+					<div class="cd-timeline-content bill-container">
+						<h2>{{ bill.name }}</h2>
+						<p>{{ bill.sponsor }}</p>
+						<span class="cd-date">{{ bill.proposed_date.strftime('%Y-%m-%d') }}</span>
 						
 						<button type="button" class="btn btn-warning float-right bill-like">
 							<i class="fa fa-thumbs-o-up"></i>
 							<strong>Like</strong>
 							<span>{{ bill.like }}</span>
-							<input name="id" type="hidden" value="{{ context[number]['id'] }}"/>
+							<input name="id" type="hidden" value="{{ bill.id }}"/>
 						</button>
 
-						{% if context[number]['summary'] != None %}
-						<a href="{{ url_for('bill_detail', id=context[number]['id']) }}" class="btn btn-info float-right">Read more</a>
+						{% if bill.summary != None %}
+						<a href="{{ url_for('bill_detail', id=bill.id) }}" class="btn btn-info float-right">Read more</a>
 						{% endif %}
 
 					</div> <!-- cd-timeline-content -->

@@ -16,7 +16,7 @@ $(document).ready(function () {
 		// top: "0px"
 		// }, 1200);
 
-	$('.llArticleDetail').on( "click", ".btn-warning", function () {
+	$('.article-like').on( "click", ".btn-warning", function () {
 			var cur_item = $(this);
 			$.ajax({
 					url: "/article/detail_like",
@@ -52,7 +52,7 @@ $(document).ready(function () {
 			});
 	});
 
-	$('.cd-container').on( "click", ".bill-like", function () {
+	$('.bill-container').on( "click", ".bill-like", function () {
 		var cur_item = $(this);
 		$.ajax({
 				url: "/bill/detail_like",
@@ -86,6 +86,39 @@ $(document).ready(function () {
 						alert("code:"+request.status+"\n"+"error:"+error);
 				}
 		});
+	});
+
+	function toggleGlobalLoadingIndicator() { 
+		var spinner_el = $(".spinner");
+		if (spinner_el.length == 0) {
+			var opts = {
+			  lines: 17, // The number of lines to draw
+			  length: 0, // The length of each line
+			  width: 10, // The line thickness
+			  radius: 60, // The radius of the inner circle
+			  corners: 1, // Corner roundness (0..1)
+			  rotate: 0, // The rotation offset
+			  direction: 1, // 1: clockwise, -1: counterclockwise
+			  color: 'rgb(255, 255, 255)', // #rgb or #rrggbb or array of colors
+			  speed: 1.7, // Rounds per second
+			  trail: 100, // Afterglow percentage
+			  shadow: false, // Whether to render a shadow
+			  hwaccel: false, // Whether to use hardware acceleration
+			  className: 'spinner', // The CSS class to assign to the spinner
+			  zIndex: 2e9, // The z-index (defaults to 2000000000)
+			  top: '50%', // Top position relative to parent
+			  left: '50%' // Left position relative to parent
+		};
+
+		$("body").prepend("<div id='spinner-container' style='position:fixed;top:0;right:0;left:0;bottom:0;z-index:9999;overflow:hidden;outline:0;background-color:rgb(61,86,109);opacity:0.8;'><h1 style='color:white; position:fixed; top:70%; left:15%; right:15%;'>데이터베이스를 최신 상태로 만들고 있습니다. 잠시만 기다려주세요!</h1></div>")
+			var spinner = new Spinner(opts).spin($("#spinner-container")[0]);      
+		} else {
+			$("#spinner-container").toggleClass("display-none");
+		}
+	}
+
+	$('.llArticleCreate').on( "click", ".btn-primary", function () {
+		toggleGlobalLoadingIndicator();
 	});
 
 //if you change this breakpoint in the style.css file (or _layout.scss if you use SASS), don't forget to update this value as well

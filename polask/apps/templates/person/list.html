@@ -3,24 +3,42 @@
 {% block contents %}
 
 	<ul id="cd-gallery-items" class="cd-container">
-	{% if context %}
-	{% for number in range(context|length) %}
+	{% if context.person_list %}
+	{% for person in context.person_list %}
 		<li>
 
 			<ul class="cd-item-wrapper">
-				<li class="cd-item-front"><a href="#0"><img src="{{ context[number]['image'] }}" alt="Preview image"></a></li>
-				<li class="cd-item-middle"><a href="#0"><img src="{{ url_for('static', filename='images/thumb-5.jpg') }}" alt="Preview image"></a></li>
-				<li class="cd-item-back"><a href="#0"><img src="{{ url_for('static', filename='images/thumb-5.jpg') }}" alt="Preview image"></a></li>
-				<li class="cd-item-out"><a href="#0"><img src="{{ url_for('static', filename='images/thumb-5.jpg') }}" alt="Preview image"></a></li>
+				<li class="cd-item-front"><a href="#0"><img src="{{ person.image }}" alt="Preview image"></a></li>
+				<li class="cd-item-middle"><a href="http://ko.wikipedia.org{{ person.wiki }}"><div class="cd-item-background" style="background-color:white; width: 353px; height: 471px">http://ko.wikipedia.org{{ person.wiki }}</div></a></li>
+				<li class="cd-item-back"><a href="#0"><div class="cd-item-background" style="background-color:white; width: 353px; height: 471px">I'm happy!</div></a></li>
+				<li class="cd-item-out"><div class="cd-item-background contact" style="background-color:white; width: 353px; height: 471px;">
+					<h2>contact</h2>
+					{% if person.homepage %}
+					<p></p>
+					<a href="{{ person.homepage }}"><img src="{{ url_for('static', filename='images/person_home.png') }}"/ style="width:50px; height:50px"></a>
+					{% endif %}
+					{% if person.facebook %}
+					<p></p>
+					<a href="http://www.facebook.com/{{ person.facebook }}"><img src="{{ url_for('static', filename='images/person_facebook.png') }}"/ style="width:50px; height:50px"></a>
+					{% endif %}
+					{% if person.twitter %}
+					<p></p>
+					<a href="http://twitter.com/{{ person.twitter }}"><img src="{{ url_for('static', filename='images/person_twitter.png') }}"/ style="width:50px; height:50px"></a>
+					{% endif %}
+					{% if person.blog %}
+					<p></p>
+					<a href="{{ person.blog }}"><img src="{{ url_for('static', filename='images/person_blog.png') }}"/ style="width:50px; height:50px"></a>
+					{% endif %}
+				</div></li>
 				<!-- <li class="cd-item-out">...</li> -->
 			</ul> <!-- cd-item-wrapper -->
 
 			<div class="cd-item-info">
-				<b><a href="#0"><strong>{{ context[number]['name'] }}</strong></a>의원</b>
+				<b><a href="#0"><strong>{{ person.name }}</strong></a>의원</b>
 				<button type="button" class="btn btn-warning btn-xs person-like">
 					<i class="fa fa-thumbs-o-up"></i>
 					<span>{{ person.like }}</span>
-					<input name="id" type="hidden" value="{{ context[number]['id'] }}"/>
+					<input name="id" type="hidden" value="{{ person.id }}"/>
 				</button>
 				<em>세월호</em>
 			</div> <!-- cd-item-info -->

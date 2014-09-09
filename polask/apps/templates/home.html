@@ -6,7 +6,7 @@
 			{% for article in context.article_list %}
 				<div class="well" id="article_{{ article.id }}">
 					<h1><a href="{{ url_for('article_detail', id=article.id) }}">{{ article.title }}</a></h1>
-					<div class="llArticleDetail">
+					<div class="llArticleDetail article-like">
 						<button type="button" class="btn btn-warning float-right">
 							<i class="fa fa-thumbs-o-up"></i>
 							<strong>Like</strong>

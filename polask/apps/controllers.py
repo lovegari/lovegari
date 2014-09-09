@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, \
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 from apps import app, db
-from random import randint
+# from bs4 import BeautifulSoup
 
 import urllib
 import json
@@ -36,12 +36,140 @@ def before_request():
 # @index & article list
 #
 
+@app.route('/db/update/person')
+def update_person():
+	htmltext = urllib.urlopen('http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9')
+	data = json.load(htmltext)
+
+	items = data['items']
+
+	for number in range(len(items)):
+		item = data['items'][number]
+
+		try:
+			person = Person(
+				id = item['id'],
+				wiki = item['wiki'],
+				name = item['name'],
+				twitter = item['twitter'],
+				gender = item['gender'],
+				image = item['image'],
+				name_cn = item['name_cn'],
+				blog = item['blog'],
+				birthday = item['birthday'],
+				facebook = item['facebook'],
+				address = item['address'],
+				name_en = item['name_en'],
+				homepage = item['homepage']
+			)
+
+			db.session.add(person)
+			db.session.commit()
+
+		except:
+			pass
+
+	return redirect(url_for('update_bill'))
+
+# @app.route('/db/update/bill_person')
+# def update_bill_person():
+# 	htmltext = urllib.urlopen("http://pokr.kr/person/19601167").read()
+
+# 	soup = BeautifulSoup(htmltext, from_encoding="utf-8")
+
+# 	raw_bills = []
+# 	bills = []
+
+# 	for link in soup.select('#person-legislations td a'):
+# 		raw_bills.append(link.get('href'))
+
+# 	for num in raw_bills:
+# 		if num.split("/")[1] == "bill":
+# 			bills.append(int(num.split("/")[2]))
+
+# 	contents = {}
+
+# 	for num in bills:
+# 		html = urllib.urlopen("http://api.popong.com/v0.1/bill/" + str(num) + "?api_key=test")
+# 		data = json.load(html)
+# 		contents[num] = data
+
+# 		if contents[num]['is_processed'] == True:
+# 			processed = 1
+# 		else:
+# 			processed = 0
+
+# 		try:
+# 			bill = Bill(
+# 				id = contents[num]['id'],
+# 				status = contents[num]['status'],
+# 				proposed_date = contents[num]['proposed_date'],
+# 				name = contents[num]['name'],
+# 				assembly_id = contents[num]['assembly_id'],
+# 				status_id = contents[num]['status_id'],
+# 				summary = contents[num]['summary'],
+# 				sponsor = contents[num]['sponsor'],
+# 				# status_ids = contents[num]['status_ids'],
+# 				document_url = contents[num]['document_url'],
+# 				decision_date = contents[num]['decision_date'],
+# 				link_id = contents[num]['link_id'],
+# 				is_processed = processed
+# 			)
+
+# 			db.session.add(bill)
+# 			db.session.commit()
+
+# 		except:
+# 			pass
+
+# 	return redirect(url_for('update_bill'))
+
+@app.route('/db/update/bill')
+def update_bill():
+	htmltext = urllib.urlopen('http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc&per_page=30')
+	data = json.load(htmltext)
+
+	items = data['items']
+
+	for number in range(len(items)):
+		item = data['items'][number]
+
+		if item['is_processed'] == True:
+			processed = 1
+		else:
+			processed = 0
+
+		try:
+			bill = Bill(
+				id = item['id'],
+				status = item['status'],
+				proposed_date = item['proposed_date'],
+				name = item['name'],
+				assembly_id = item['assembly_id'],
+				status_id = item['status_id'],
+				summary = item['summary'],
+				sponsor = item['sponsor'],
+				# status_ids = item['status_ids'],
+				document_url = item['document_url'],
+				decision_date = item['decision_date'],
+				link_id = item['link_id'],
+				is_processed = processed
+			)
+
+			db.session.add(bill)
+			db.session.commit()
+
+		except:
+			pass
+
+	return redirect(url_for('article_list'))
+
 @app.route('/', methods=['GET', 'POST'])
 def frontgate():
 	form = LoginForm()
 
 	if request.method == 'POST':
-	   if form.validate_on_submit():
+		 if form.validate_on_submit():
 			email = form.email.data
 			password = form.password.data
 
@@ -57,7 +185,7 @@ def frontgate():
 					session['user_id'] = user.id
 
 					flash(u'로그인 되었습니다.', 'success')
-					return redirect(url_for('article_list')) 
+					return redirect(url_for('update_person')) 
 
 			except NoResultFound, e: 
 				flash(u'이메일 혹은 비밀번호를 확인해주세요.', 'danger') 
@@ -70,7 +198,7 @@ def frontgate():
 def article_list():
 	context = {}
 	context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
-   
+	 
 	return render_template("home.html", context=context, active_tab='timeline')
 
 @app.route('/article/create', methods=['GET', 'POST'])
@@ -224,7 +352,7 @@ def log_in():
 	form = LoginForm()
 
 	if request.method == 'POST':
-	   if form.validate_on_submit():
+		 if form.validate_on_submit():
 			email = form.email.data
 			password = form.password.data
 
@@ -255,37 +383,18 @@ def log_out():
 
 @app.route('/bill/list')
 def bill_list():
-	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/?api_key=test&sort=proposed_date&order=desc&per_page=20")
-	data = json.load(htmltext)
-
-	items = data['items']
 	context = {}
+	context['bill_list'] = Bill.query.order_by(desc(Bill.proposed_date)).all()
+	 
+	return render_template("bill/list.html", context=context)
 
-	for number in range(len(items)):
-		items = data['items'][number]
-		context[number] = items
-
-		try:
-			bill = Bill (
-				bill_id = context[number]['id']
-			)
-
-			db.session.add(bill)
-			db.session.commit()
-
-		except:
-			pass
-			
-	return render_template("bill/list.html", context=context, bill=bill)
-
-@app.route('/bill/detail/<int:id>', methods=['GET'])
+@app.route('/bill/<int:id>', methods=['GET'])
 def bill_detail(id):
-	htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/"+ str(id) +"?api_key=test")
-	bill = json.load(htmltext)
+	bill = Bill.query.get(id)
 	
 	return render_template('bill/detail.html', bill=bill)
 
-@app.route('/bill/detail_like', methods=['GET'])
+@app.route('/bill/like', methods=['GET'])
 def bill_like_ajax():
 	id = request.args.get('id',0,type=int)
 
@@ -303,28 +412,10 @@ def bill_timeline():
 
 @app.route('/person/list')
 def person_list():
-	htmltext = urllib.urlopen("http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9")
-	data = json.load(htmltext)
-
-	items = data['items']
 	context = {}
+	context['person_list'] = Person.query.order_by(desc(Person.birthday)).all()
 
-	for number in range(len(items)):
-		items = data['items'][number]
-		context[number] = items
-
-		try:
-			person = Person (
-				person_id = context[number]['id']
-			)
-
-			db.session.add(person)
-			db.session.commit()
-
-		except:
-			pass
-
-	return render_template("person/list.html", context=context, person=person)
+	return render_template("person/list.html", context=context)
 
 @app.route('/person/detail_like', methods=['GET'])
 def person_like_ajax():

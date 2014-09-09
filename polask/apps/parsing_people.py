@@ -27,3 +27,8 @@ for number in range(len(items)):
 if context:
 	for number in range(len(context)):
 		print context[number]['twitter']
+		print context[number]['blog']
+		print context[number]['facebook']
+		print context[number]['homepage']
+		print context[number]['wiki']
+		print

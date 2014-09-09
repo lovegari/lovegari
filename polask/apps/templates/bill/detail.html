@@ -2,24 +2,24 @@
 
 {% block contents %}
 	<div class="llArticleDetail">
-		<h1>{{ bill['name'] }}</h1>
+		<h1>{{ bill.name }}</h1>
 
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">{{ bill['sponsor'] }}<span class="float-right"> <span class="badge">{{ bill['status'] }}</span>{{ bill['proposed_date'] }}</span></h3>
+				<h3 class="panel-title">{{ bill.sponsor }}<span class="float-right"> <span class="badge">{{ bill.status }}</span>{{ bill.proposed_date.strftime('%Y-%m-%d') }}</span></h3>
 			</div>
 
 			<div class="panel-body">
-					{{ bill['summary'] }}
+					{{ bill.summary }}
 			</div>
 		</div>
 
-		<div class="bottomButtons">
+		<div class="bottomButtons bill-container">
 			<button type="button" class="btn btn-warning bill-like">
 				<i class="fa fa-thumbs-o-up"></i>
 				<strong>Like</strong>
 				<span>{{ bill.like }}</span>
-				<input name="id" type="hidden" value="{{ bill['id'] }}"/>
+				<input name="id" type="hidden" value="{{ bill.id }}"/>
 			</button>
 		</div>
 
