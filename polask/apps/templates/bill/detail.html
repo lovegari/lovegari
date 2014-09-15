@@ -15,11 +15,15 @@
 		</div>
 
 		<div class="bottomButtons bill-container">
-			<button type="button" class="btn btn-warning bill-like">
-				<i class="fa fa-thumbs-o-up"></i>
-				<strong>Like</strong>
-				<span>{{ bill.like }}</span>
-				<input name="id" type="hidden" value="{{ bill.id }}"/>
+			<button type="button" class="ui huge orange fade animated button bill-like">
+				<div class="visible content">
+					<i class="fa fa-thumbs-o-up"></i>
+					<span>{{ bill.like }}</span>
+				</div>
+				<div class="hidden content">
+					<strong>Like</strong>
+					<input name="id" type="hidden" value="{{ bill.id }}"/>
+				</div>
 			</button>
 		</div>
 

@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+	<div class="llArticleDetail">
+		<h1>{{ person.name }} <small>의원</small> </h1>
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"> <span class="badge">19대</span> {{ person.name }} 의원 <span class="float-right">{{ person.birthday.strftime('%Y-%m-%d') }}</span></h3>
+			</div>
+
+			<div class="panel-body">
+				<img src="{{ person.image }}" alt="Preview image" width="353px" height="471px">
+			</div>
+		</div>
+		
+		<div class="cd-item-background contact" style="text-align:center">
+			{% if person.homepage %}
+			<a href="{{ person.homepage }}" class="ui massive purple fade animated button" style="width:110px">					
+				<div class="visible content">
+					<i class="fa fa-home"></i>
+				</div>
+					<div class="hidden content">
+						Homepage
+				</div>
+			</a>
+			{% endif %}
+			{% if person.facebook %}
+			<a href="http://www.facebook.com/{{ person.facebook }}" class="ui massive facebook fade animated button" style="width:110px">
+				<div class="visible content">
+					<i class="fa fa-facebook"></i>
+				</div>
+					<div class="hidden content">
+						facebook
+				</div>
+			</a>
+			{% endif %}
+			{% if person.twitter %}
+			<a href="http://twitter.com/{{ person.twitter }}" class="ui massive twitter fade animated button" style="width:110px">
+				<div class="visible content">
+					<i class="fa fa-twitter"></i>
+				</div>
+					<div class="hidden content">
+						twitter
+				</div>
+			</a>
+			{% endif %}
+			{% if person.blog %}
+			<a href="{{ person.blog }}" class="ui massive green fade animated button" style="width:110px">
+				<div class="visible content">
+					<i class="fa fa-pencil-square-o"></i>
+				</div>
+					<div class="hidden content">
+						blog
+				</div>
+			</a>
+			{% endif %}
+		</div>
+
+		<div class="bottomButtons person-container">
+			<button type="button" class="ui huge orange fade animated button person-like" style="top:25%">
+				<div class="visible content">
+					<i class="fa fa-thumbs-o-up"></i>
+					<span>{{ person.like }}</span>
+				</div>
+				<div class="hidden content">
+					<strong>Like</strong>
+					<input name="id" type="hidden" value="{{ person.id }}"/>
+				</div>
+			</button>
+	</div>
+
+	<section id="cd-timeline" class="cd-container">
+		{% if contents %}
+			{% for num in contents %}
+				<div class="cd-timeline-block">
+
+					{% if num['status_id'] in [1, 2, 4, 5, 11] %}
+						<div class="cd-timeline-img cd-location">
+					{% elif num['status_id'] in [6, 7, 9] %}
+						<div class="cd-timeline-img cd-picture">
+					{% else %}
+						<div class="cd-timeline-img cd-movie">
+					{% endif %}
+						<span class="cd-date">{{ num['status'] }}</span>
+					</div> <!-- cd-timeline-img -->
+
+					<div class="cd-timeline-content bill-container">
+						<h2>{{ num['name'] }}</h2>
+						<p>{{ num['sponsor'] }}</p>
+						<span class="cd-date">{{ num['proposed_date'] }}</span>
+						
+						{% if num['summary'] != None %}
+						<a href="{{ url_for('bill_detail', id=num['id']) }}" class="ui huge blue animated button float-right">
+						  <div class="visible content">More</div>
+						  <div class="hidden content">
+						  	<i class="fa fa-arrow-right"></i>
+						  </div>
+						</a>
+						{% endif %}
+
+						<button type="button" class="ui huge orange fade animated button float-right bill-like">
+							<div class="visible content">
+								<i class="fa fa-thumbs-o-up"></i>
+								<span>0</span>
+							</div>
+							<div class="hidden content">
+								<strong>Like</strong>
+								<input name="id" type="hidden" value="{{ num['id'] }}"/>
+							</div>
+						</button>
+
+					</div> <!-- cd-timeline-content -->
+				</div> <!-- cd-timeline-block -->
+			{% endfor %}
+		{% else %}
+			<div class="no-list">
+				There is no post. Upload your own post!
+			</div>
+		{% endif %}
+	</section> <!-- cd-timeline -->
+{% endblock %}
+
+

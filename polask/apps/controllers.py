@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, \
 from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 from apps import app, db
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 import urllib
 import json
@@ -38,7 +38,7 @@ def before_request():
 
 @app.route('/db/update/person')
 def update_person():
-	htmltext = urllib.urlopen('http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9')
+	htmltext = urllib.urlopen('http://api.popong.com/v0.1/person/?api_key=test&sort=image&order=desc&per_page=9&assembly_id=19')
 	data = json.load(htmltext)
 
 	items = data['items']
@@ -394,7 +394,7 @@ def bill_detail(id):
 	
 	return render_template('bill/detail.html', bill=bill)
 
-@app.route('/bill/like', methods=['GET'])
+@app.route('/bill/detail_like', methods=['GET'])
 def bill_like_ajax():
 	id = request.args.get('id',0,type=int)
 
@@ -427,6 +427,62 @@ def person_like_ajax():
 	db.session.commit()
 
 	return jsonify(id=id)
+
+@app.route('/person/<int:id>', methods=['GET'])
+def person_detail(id):
+	person = Person.query.get(id)
+	
+	htmltext = urllib.urlopen("http://pokr.kr/person/"+str(person.id)).read()
+
+	soup = BeautifulSoup(htmltext)
+
+	raw_bills = []
+	bills = []
+
+	for link in soup.select('#person-legislations td a'):
+		raw_bills.append(link.get('href'))
+
+	for num in raw_bills:
+		if num.split("/")[1] == "bill":
+			bills.append(int(num.split("/")[2]))
+
+	contents = []
+
+	for num in bills:
+		htmltext = urllib.urlopen("http://api.popong.com/v0.1/bill/" + str(num) + "?api_key=test&sort=proposed_date&order=desc")
+		data = json.load(htmltext)
+		contents.append(data)
+
+		if data['is_processed'] == True:
+			processed = 1
+		else:
+			processed = 0
+
+		try:
+			bill = Bill(
+				id = data['id'],
+				status = data['status'],
+				proposed_date = data['proposed_date'],
+				name = data['name'],
+				assembly_id = data['assembly_id'],
+				status_id = data['status_id'],
+				summary = data['summary'],
+				sponsor = data['sponsor'],
+				# status_ids = data['status_ids'],
+				document_url = data['document_url'],
+				decision_date = data['decision_date'],
+				link_id = data['link_id'],
+				is_processed = processed
+			)
+
+			db.session.add(bill)
+			db.session.commit()
+
+		except:
+			db.session.rollback()
+			pass
+
+	return render_template('person/detail.html', person=person, contents=contents)
 
 #
 # @error Handlers

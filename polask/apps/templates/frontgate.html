@@ -3,14 +3,14 @@
 {% block frontgate %}
 
 <div id="maximage">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_02.jpg') }}">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_01.jpg') }}">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_03.jpg') }}">
-  <img src="{{ url_for('static', filename='images/frontgate_bg_04.jpg') }}">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_02.jpg') }}">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_01.jpg') }}">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_03.jpg') }}">
+	<img src="{{ url_for('static', filename='images/frontgate_bg_04.jpg') }}">
 </div>
 
 <div class="title">
-  <p>Polask</p>
+	<p>Polask</p>
 </div>
 
 <div class="llArticleCreate" id="login">
@@ -41,10 +41,32 @@
 			{{ render_field(field, class="form-control") }}
 		{% endfor %}
 
-		<a href="{{ url_for('user_join') }}" class="btn btn-default">Join</a>
-		<button type="submit" class="btn btn-primary float-right" >Log In</button>
+		<a href="{{ url_for('user_join') }}" class="ui huge fade animated button">
+			<div class="visible content">Join</div>
+			<div class="hidden content">
+				<i class="fa fa-users"></i>
+			</div>
+		</a>
+
+		<button type="submit" class="ui blue huge animated button float-right log-in">
+			<div class="visible content">Login</div>
+			<div class="hidden content">
+				<i class="fa fa-arrow-right"></i>
+			</div>
+		</button>
 	</form>
-	<div class="fb-login-button float-right" id="facebook-btn" data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="false"></div>
+	<!--
+		Below we include the Login Button social plugin. This button uses
+		the JavaScript SDK to present a graphical Login button that triggers
+		the FB.login() function when clicked.
+	-->
+	<br>
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+	</fb:login-button>
+	 
+	<div id="status">
+	</div>
+
 </div>
 
 

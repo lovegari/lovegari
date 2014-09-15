@@ -22,16 +22,25 @@
 						<p>{{ bill.sponsor }}</p>
 						<span class="cd-date">{{ bill.proposed_date.strftime('%Y-%m-%d') }}</span>
 						
-						<button type="button" class="btn btn-warning float-right bill-like">
-							<i class="fa fa-thumbs-o-up"></i>
-							<strong>Like</strong>
-							<span>{{ bill.like }}</span>
-							<input name="id" type="hidden" value="{{ bill.id }}"/>
-						</button>
-
 						{% if bill.summary != None %}
-						<a href="{{ url_for('bill_detail', id=bill.id) }}" class="btn btn-info float-right">Read more</a>
+						<a href="{{ url_for('bill_detail', id=bill.id) }}" class="ui huge blue animated button float-right">
+						  <div class="visible content">More</div>
+						  <div class="hidden content">
+						  	<i class="fa fa-arrow-right"></i>
+						  </div>
+						</a>
 						{% endif %}
+
+						<button type="button" class="ui huge orange fade animated button float-right bill-like">
+							<div class="visible content">
+								<i class="fa fa-thumbs-o-up"></i>
+								<span>{{ bill.like }}</span>
+							</div>
+							<div class="hidden content">
+								<strong>Like</strong>
+								<input name="id" type="hidden" value="{{ bill.id }}"/>
+							</div>
+						</button>
 
 					</div> <!-- cd-timeline-content -->
 				</div> <!-- cd-timeline-block -->

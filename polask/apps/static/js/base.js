@@ -58,11 +58,11 @@ $(document).ready(function () {
 				url: "/bill/detail_like",
 				dataType:'JSON',
 				data: {
-						id : cur_item.children().last().val()
+						id : cur_item.children(".hidden").children("input").val()
 				},
 				success: function() {
-						var cur_value = cur_item.children().last().prev().text();
-						cur_item.children().last().prev().text(parseInt(cur_value) + 1);
+						var cur_value = cur_item.children(".visible").children("span").text();
+						cur_item.children(".visible").children("span").text(parseInt(cur_value) + 1);
 				},
 				error: function(request,status,error){
 						alert("code:"+request.status+"\n"+"error:"+error);
@@ -70,17 +70,17 @@ $(document).ready(function () {
 		});
 	});
 
-	$('.cd-item-info').on( "click", ".person-like", function () {
+	$('.person-container').on( "click", ".person-like", function () {
 		var cur_item = $(this);
 		$.ajax({
 				url: "/person/detail_like",
 				dataType:'JSON',
 				data: {
-						id : cur_item.children().last().val()
+						id : cur_item.children(".hidden").children("input").val()
 				},
 				success: function() {
-						var cur_value = cur_item.children().last().prev().text();
-						cur_item.children().last().prev().text(parseInt(cur_value) + 1);
+						var cur_value = cur_item.children(".visible").children("span").text();
+						cur_item.children(".visible").children("span").text(parseInt(cur_value) + 1);
 				},
 				error: function(request,status,error){
 						alert("code:"+request.status+"\n"+"error:"+error);
@@ -117,7 +117,11 @@ $(document).ready(function () {
 		}
 	}
 
-	$('.llArticleCreate').on( "click", ".btn-primary", function () {
+	$('.llArticleCreate').on( "click", ".log-in", function () {
+		toggleGlobalLoadingIndicator();
+	});
+
+	$('#cd-gallery-items').on( "click", ".person-click", function () {
 		toggleGlobalLoadingIndicator();
 	});
 

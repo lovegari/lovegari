@@ -9,10 +9,10 @@
 				<ul class="cd-secondary-nav">
 						{% if g.user_name != None %}
 						<li><a href="">{{ g.user_name }}님 안녕하세요!</a></li>
-						<li><a href = "{{ url_for('log_out')}}">Log Out</a></li>
+						<li><a href = "{{ url_for('log_out')}}">Logout</a></li>
 						{% else %}
-						<li><a href="{{ url_for('log_in') }}">Log In</a></li>
-						<li><a href="{{ url_for('user_join') }}">Register</a></li>
+						<li><a href="{{ url_for('log_in') }}">Login</a></li>
+						<li><a href="{{ url_for('user_join') }}">Join</a></li>
 						{% endif %}
 				</ul>
 		</nav> <!-- cd-nav -->
@@ -24,20 +24,20 @@
 
 <nav>
 		<ul class="cd-primary-nav">
-				<li class="cd-label">Option</li>
 
+				{% if g.user_name != None %}
+				<li class="cd-label">Option</li>
 				<li><a href="{{ url_for('person_list') }}">person</a></li>
 				<li><a href="{{ url_for('bill_list') }}">Bill</a></li>
 				<li><a href="">Party</a></li>
 				<li><a href="{{ url_for('article_list') }}">Timeline</a></li>
 
 				<li class="cd-label">Membership</li>
-				
-				{% if g.user_name != None %}
-				<li><a href = "{{ url_for('log_out')}}">Log Out</a></li>
+				<li><a href = "{{ url_for('log_out')}}">Logout</a></li>
 				{% else %}
+				<li class="cd-label">Membership</li>
 				<li><a href="{{ url_for('user_join') }}">Join</a></li>
-				<li><a href="{{ url_for('log_in') }}">Log In</a></li>
+				<li><a href="{{ url_for('log_in') }}">Login</a></li>
 				{% endif %}
 				<li><a href="{{ url_for('article_create') }}">Request</a></li>
 

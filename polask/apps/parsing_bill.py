@@ -48,36 +48,36 @@ data = json.load(htmltext)
 
 items = data['items']
 
-for item in items:
-	status = item['status'],
-	proposed_date = item['proposed_date'],
-	name = item['name'],
-	assembly_id = item['assembly_id'],
-	status_id = item['status_id'],
-	summary = item['summary'],
-	sponsor = item['sponsor'],
-	status_ids = item['status_ids'],
-	document_url = item['document_url'],
-	decision_date = item['decision_date'],
-	link_id = item['link_id'],
-	is_processed = item['is_processed'],
-	id = item['id']
+# for item in items:
+# 	status = item['status'],
+# 	proposed_date = item['proposed_date'],
+# 	name = item['name'],
+# 	assembly_id = item['assembly_id'],
+# 	status_id = item['status_id'],
+# 	summary = item['summary'],
+# 	sponsor = item['sponsor'],
+# 	status_ids = item['status_ids'],
+# 	document_url = item['document_url'],
+# 	decision_date = item['decision_date'],
+# 	link_id = item['link_id'],
+# 	is_processed = item['is_processed'],
+# 	id = item['id']
 
 
-# for number in range(len(items)):
-# 	items = data['items'][number]
-# 	assembly_id = items['assembly_id']
-# 	document_url = items['document_url']
-# 	id = items['id']
-# 	is_processed = items['is_processed']
-# 	link_id = items['link_id']
-# 	name = items['name']
-# 	proposed_date = items['proposed_date']
-# 	sponsor = items['sponsor']
-# 	status = items['status']
-# 	status_id = items['status_id']
-# 	status_ids = items['status_ids']
-# 	summary = items['summary']
+for number in range(len(items)):
+	items = data['items'][number]
+	assembly_id = items['assembly_id']
+	document_url = items['document_url']
+	id = items['id']
+	is_processed = items['is_processed']
+	link_id = items['link_id']
+	name = items['name']
+	proposed_date = items['proposed_date']
+	sponsor = items['sponsor']
+	status = items['status']
+	status_id = items['status_id']
+	status_ids = items['status_ids']
+	summary = items['summary']
 
 	print assembly_id
 	print document_url
