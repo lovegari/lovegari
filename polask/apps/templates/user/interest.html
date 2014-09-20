@@ -4,7 +4,6 @@
 
 {% block contents %}
 <div id="maximage">
-	<img src="{{ url_for('static', filename='images/login_bg_02.jpg') }}" width="1440px" height="740px">
 	<img src="{{ url_for('static', filename='images/login_bg_01.jpg') }}" width="1440px" height="740px">
 	<img src="{{ url_for('static', filename='images/login_bg_03.jpg') }}" width="1440px" height="740px">
 	<img src="{{ url_for('static', filename='images/login_bg_04.jpg') }}" width="1440px" height="740px">
@@ -13,29 +12,67 @@
 
 <div class="llArticleCreate" id="join">
 	<form role="form" method="post">
-		<p style="font-size:60px">회원가입</p>
-		<p style="font-size:20px">2단계 : 관심 분야 선택</p>
-		<br>
+		<p style="font-size:60px; text-shadow: 1px 1px 5px black;">회원가입</p>
+		<p style="font-family:'Jeju Gothic'; font-size:20px; text-shadow: 1px 1px 5px black;">2단계 : 관심 분야 선택</p>
+		<p></p>
+		<input type="hidden" id="user-id" value="{{ user_id }}">
 		<div class="form-group">
-			<button type="button" class="btn btn-default" id="politics">정치</button>
-			<button type="button" class="btn btn-default" id="economics">경제</button>
-			<button type="button" class="btn btn-default" id="society">사회</button>
-			<button type="button" class="btn btn-default" id="culture">문화</button>
-			<button type="button" class="btn btn-default" id="education">교육</button>
+			<button type="button" class="ui huge button interest" id="law">법제</button>
+			<button type="button" class="ui huge button interest" id="finance">재정</button>
+			<button type="button" class="ui huge button interest" id="deploy">외교</button>
 			<p></p>
-			<button type="button" class="btn btn-default" id="defense">국방</button>
-			<button type="button" class="btn btn-default" id="health">건강</button>
-			<button type="button" class="btn btn-default" id="welfare">복지</button>
-			<button type="button" class="btn btn-default" id="safety">안전</button>
-			<button type="button" class="btn btn-default" id="religion">종교</button>
-			<p></p>
-			<button type="button" class="btn btn-default" id="tech">기술</button>
-			<button type="button" class="btn btn-default" id="transportation">교통</button>
-			<button type="button" class="btn btn-default" id="environment">환경</button>
-			<button type="button" class="btn btn-default" id="world">세계</button>
-			<button type="button" class="btn btn-default" id="childcare">보육</button>
+
+			<button type="button" class="ui huge button interest" id="unite">통일</button>
+			<button type="button" class="ui huge button interest" id="defense">국방</button>
+			<button type="button" class="ui huge button interest" id="safety">안전</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="administer">행정</button>
+			<button type="button" class="ui huge button interest" id="edu">교육</button>
+			<button type="button" class="ui huge button interest" id="culture">문화</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="sports">체육</button>
+			<button type="button" class="ui huge button interest" id="sight">관광</button>
+			<button type="button" class="ui huge button interest" id="science">과학</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="broadcast">방송</button>
+			<button type="button" class="ui huge button interest" id="communication">통신</button>
+			<button type="button" class="ui huge button interest" id="startup">창업</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="agriculture">농림</button>
+			<button type="button" class="ui huge button interest" id="female">여성</button>
+			<button type="button" class="ui huge button interest" id="family">가족</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="food">식품</button>
+			<button type="button" class="ui huge button interest" id="ocean">해양</button>
+			<button type="button" class="ui huge button interest" id="ethics">윤리</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="industry">산업</button>
+			<button type="button" class="ui huge button interest" id="budget">예산</button>
+			<button type="button" class="ui huge button interest" id="resource">자원</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="health">보건</button>
+			<button type="button" class="ui huge button interest" id="welfare">복지</button>
+			<button type="button" class="ui huge button interest" id="environment">환경</button>
+			<p></p>			
+
+			<button type="button" class="ui huge button interest" id="labor">노동</button>
+			<button type="button" class="ui huge button interest" id="country">국토</button>
+			<button type="button" class="ui huge button interest" id="transportation">교통</button>
+
 		</div>
-		<button type="submit" class="btn btn-primary" id="submit">다음단계</button>
+		<button type="button" class="ui huge blue animated button float-right submit-interest">
+				<div class="visible content">Finish</div>
+				<div class="hidden content">
+					<i class="fa fa-check"></i>
+				</div>
+		</button>
 	</form>
 </div>
 {% endblock %}

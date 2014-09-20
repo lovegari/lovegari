@@ -7,10 +7,25 @@ from apps import db
 
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	email = db.Column(db.String(255))
+	email = db.Column(db.String(255), unique=True)
 	password = db.Column(db.String(255))
 	name = db.Column(db.String(255))
 	join_date = db.Column(db.DateTime())
+	law = db.Column(db.Integer, default=0)
+	finance = db.Column(db.Integer, default=0)
+	deploy = db.Column(db.Integer, default=0)
+	defense = db.Column(db.Integer, default=0)
+	safety = db.Column(db.Integer, default=0)
+	edu = db.Column(db.Integer, default=0)
+	science = db.Column(db.Integer, default=0)
+	agriculture = db.Column(db.Integer, default=0)
+	industry = db.Column(db.Integer, default=0)
+	health = db.Column(db.Integer, default=0)
+	environment = db.Column(db.Integer, default=0)
+	country = db.Column(db.Integer, default=0)
+	family = db.Column(db.Integer, default=0)
+	budget = db.Column(db.Integer, default=0)
+	ethics = db.Column(db.Integer, default=0)
 
 class Article(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -25,8 +40,7 @@ class Comment(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	article_id = db.Column(db.Integer, db.ForeignKey('article.id'))
 	article = db.relationship('Article',
-							  backref=db.backref('comments', cascade='all, delete-orphan', lazy='dynamic'))
-
+							  backref=db.backref('comment', cascade='all, delete-orphan', lazy='dynamic'))
 	author = db.Column(db.String(255))
 	email = db.Column(db.String(255))
 	password = db.Column(db.String(255))
@@ -49,6 +63,7 @@ class Bill(db.Model):
 	link_id = db.Column(db.Integer)
 	is_processed = db.Column(db.Boolean)
 	like = db.Column(db.Integer, default=0)
+	keyword = db.Column(db.String(100))
 
 class Person(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -67,3 +82,4 @@ class Person(db.Model):
 	homepage = db.Column(db.String(255))
 	education_id = db.Column(db.String(255))
 	like = db.Column(db.Integer, default=0)
+	keyword = db.Column(db.String(100))

@@ -339,8 +339,7 @@ def user_join():
 			db.session.add(user)
 			db.session.commit()
 
-			flash(u'가입이 완료 되었습니다.', 'success')
-			return redirect(url_for('article_list'))
+			return redirect(url_for('user_interest', user_id = user.id))
 	#if GET
 	return render_template('user/join.html', form=form, active_tab='user_join')
 
@@ -374,6 +373,62 @@ def log_in():
 				return render_template('user/login.html', form=form, active_tab='log_in') 
 
 	return render_template('user/login.html', form = form, active_tab='log_in')
+
+@app.route('/user/interest/<int:user_id>', methods=['GET','POST'])
+def user_interest(user_id):
+	# if request.method == 'POST':
+	# 	flash(u'가입이 완료 되었습니다.', 'success')
+	# 	return redirect(url_for('log_in'))
+
+	return render_template('user/interest.html', user_id = user_id)
+
+@app.route('/user/set_interest', methods=['POST'])
+def set_interest():
+	data = request.form
+	user_id = data['user_id']
+	interests = data['s_list']
+
+	user = User.query.get(user_id)
+
+	for item in interests[1:-1].split(","):
+		interest = item[1:-1]
+		if interest == "law":
+			user.law = 10
+		elif interest == "finance":
+			user.finance = 10
+		elif interest == "defense":
+			user.defense = 10
+		elif interest == "budget":
+			user.budget = 10
+		elif interest == "ethics":
+			user.ethics = 10
+		elif interest == ("deploy" or "unite"):
+			user.deploy = 10
+		elif interest == ("safety" or "administer"):
+			user.safety = 10
+		elif interest == ("edu" or "culture" or "sports" or "sight"):
+			user.edu = 10
+		elif interest == ("science" or "communication" or "broadcast"):
+			user.science = 10
+		elif interest == ("agriculture" or "food" or "ocean"):
+			user.agriculture = 10
+		elif interest == ("industry" or "resource" or "startup"):
+			user.industry = 10
+		elif interest == ("health" or "welfare"):
+			user.health = 10
+		elif interest == ("environment" or "labor"):
+			user.environment = 10
+		elif interest == ("country" or "transportation"):
+			user.country = 10
+		elif interest == ("family" or "female"):
+			user.family = 10
+
+
+	db.session.commit()
+
+	return jsonify(status = 0)
+
+
 
 @app.route('/logout')
 def log_out():

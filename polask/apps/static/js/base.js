@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+	$('.interest').click(function() {
+		$(this).toggleClass('orange active')
+	});
+
 	$(function(){
 		jQuery('#maximage').maximage();
 	});
@@ -86,6 +90,25 @@ $(document).ready(function () {
 						alert("code:"+request.status+"\n"+"error:"+error);
 				}
 		});
+	});
+
+	$('.submit-interest').click(function() {
+		var s_list = [];
+		var s_items = $('div.form-group').find('.orange');
+		s_items.each(function(index) {
+			s_list.push(s_items[index].getAttribute('id'));
+		});
+
+		$.post('/user/set_interest', {
+				'user_id' : $('#user-id').val(),
+				's_list' : JSON.stringify(s_list)
+			},
+			function (data){
+				if (data.status == 0) {
+					location.href = '/login';
+				}
+			}
+		);
 	});
 
 	function toggleGlobalLoadingIndicator() { 
