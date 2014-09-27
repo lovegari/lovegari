@@ -41,6 +41,10 @@ a {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bill-like {
+	margin-left: 3px;
+}
+
 .cd-intro h1 {
   position: absolute;
   width: 90%;

@@ -46,6 +46,50 @@ def update_person():
 	for number in range(len(items)):
 		item = data['items'][number]
 
+		# try:
+		# 	person = Person(
+		# 		id = item['id'],
+		# 		wiki = item['wiki'],
+		# 		name = item['name'],
+		# 		twitter = item['twitter'],
+		# 		gender = item['gender'],
+		# 		image = item['image'],
+		# 		name_cn = item['name_cn'],
+		# 		blog = item['blog'],
+		# 		birthday = item['birthday'],
+		# 		facebook = item['facebook'],
+		# 		address = item['address'],
+		# 		name_en = item['name_en'],
+		# 		homepage = item['homepage'] 
+		# 	)
+
+		# 	db.session.add(person)
+		# 	db.session.commit()
+
+		# except:
+		# 	pass
+
+		# url = item['image']
+		# url_num = url.split("/")[4].split(".")[0]
+
+		# html_person = urllib.urlopen('http://www.assembly.go.kr/assm/memPop/memPopup.do?dept_cd=' + url_num).read()
+		# soup = BeautifulSoup(html_person)
+
+		# info = []
+
+		# if soup.select(".pro_detail dd"):
+		# 	for item in soup.select(".pro_detail dd"):
+		# 	    info.append(str(item).split("<dd>")[1].split("</dd>")[0].split()[0])
+
+		# 	person_keyword = info[2]
+		# else:
+		# 	person_keyword = "nothing"
+
+		# try:
+		# 	person = Person(
+		# 		keyword = person_keyword
+		# 	)
+
 		try:
 			person = Person(
 				id = item['id'],

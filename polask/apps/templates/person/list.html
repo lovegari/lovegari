@@ -8,7 +8,15 @@
 		<li>
 
 			<ul class="cd-item-wrapper">
-				<li class="cd-item-front"><a href="{{ url_for('person_detail', id=person.id) }}" class="person-click"><img src="{{ person.image }}" alt="Preview image"></a></li>
+				<li class="cd-item-front">
+				<a href="{{ url_for('person_detail', id=person.id) }}" class="person-click">
+				{% if person.image %}
+				<img src="{{ person.image }}" alt="Preview image">
+				{% else %}
+				<img src="{{ url_for('static', filename='images/person_profile_image.jpg') }}">
+				{% endif %}
+				</a>
+				</li>
 				<li class="cd-item-middle"><div class="cd-item-background contact" style="background-color:white; width: 353px; height: 471px; text-align:center;">
 					<h2>contact</h2>
 					{% if person.homepage %}
